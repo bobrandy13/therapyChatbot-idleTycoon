@@ -1,7 +1,6 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import TherapyBot from "./TherapyChatBot";
 import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
@@ -9,6 +8,7 @@ export default function HomePage() {
   const { data: session } = useSession();
 
   if (session) {
+    localStorage.setItem("user", JSON.stringify(session));
     console.log(session);
   }
   const [isVisible, setVisible] = useState(true);
@@ -39,7 +39,7 @@ export default function HomePage() {
                   callbackUrl: `http://localhost:3000/home`,
                 });
                 setVisible(false);
-                redirect("/home")
+                redirect("/home");
               }}
             >
               Sign in to get started.

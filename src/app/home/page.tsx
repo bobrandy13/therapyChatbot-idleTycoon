@@ -13,6 +13,11 @@ const messagesLoop = async () => {
   return { prefix, content, author };
 };
 
+const deductFromTotal = (amount: number): boolean => {
+  console.log(amount);
+  return true;
+};
+
 function TherapyBot() {
   const [submitHidden, setHidden] = useState("block");
   const [machineMessage, setMessage] = useState("Machine is thinking");
@@ -38,6 +43,7 @@ function TherapyBot() {
       setAnimateState(true);
 
       // TODO: deduct money from the system.
+      deductFromTotal(50);
     }
     let counter = 0;
 
