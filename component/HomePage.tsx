@@ -2,11 +2,17 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import TherapyBot from "./TherapyChatBot";
+import { signIn, useSession } from "next-auth/react";
 
 export default function HomePage() {
+  const { data: session } = useSession();
+
+  if (session) {
+    console.log(session);
+  }
   const [isVisible, setVisible] = useState(true);
   return (
-    <div className="min-w-screen text-bold bg-base-100 flex min-h-screen items-center justify-center text-2xl text-white ">
+    <div className="min-w-screen text-bold flex min-h-screen items-center justify-center bg-base-100 text-2xl text-white ">
       {isVisible && (
         <AnimatePresence mode="wait">
           <motion.div
@@ -26,16 +32,21 @@ export default function HomePage() {
             }
             <button
               key={"button"}
-              className="btn btn-active btn-primary m-4 mt-4 w-1/2 p-2 text-white"
-              onClick={() => setVisible(false)}
+              className="btn btn-primary btn-active m-4 mt-4 w-1/2 p-2 text-white"
+              onClick={() => {
+                void signIn("github", {
+                  callbackUrl: `http://localhost:3000/home`,
+                });
+                setVisible(false);
+              }}
             >
-              Click here to start
+              Sign in to get started.
             </button>
           </motion.div>
         </AnimatePresence>
       )}
 
-      {!isVisible && <TherapyBot />}
+      {/* {!isVisible && <TherapyBot />} */}
     </div>
   );
 }

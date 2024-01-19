@@ -4,7 +4,7 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 
 import { env } from "~/env";
 import { db } from "~/server/db";
@@ -56,7 +56,12 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
+    GithubProvider({
+      clientId: process.env.GITHUB_ID ?? "",
+      clientSecret: process.env.GITHUB_SECRET ?? "",
+    }),
   ],
+  secret: env.NEXTAUTH_SECRET,
 };
 
 /**
