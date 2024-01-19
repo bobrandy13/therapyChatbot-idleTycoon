@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
 import SessionProvder from "./components/SessionProvider";
+import { authOptions } from "~/server/auth";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,7 +21,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>

@@ -1,4 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
 import {
   getServerSession,
   type DefaultSession,
@@ -30,6 +31,16 @@ declare module "next-auth" {
   // }
 }
 
+const customPrismaAdapter = (p: typeof db) => {
+  return {
+    ...PrismaAdapter(p),
+    createUser: (data: any) => {
+      const balance = 1000;
+      return p.user.create({ data: { ...data, balance } });
+    },
+  };
+};
+
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
  *
@@ -45,7 +56,8 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
-  adapter: PrismaAdapter(db),
+  adapter: customPrismaAdapter(db),
+  // adapter: customPrismaAdapter(primsa),
   providers: [
     /**
      * ...add more providers here.
