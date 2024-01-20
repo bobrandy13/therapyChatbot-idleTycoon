@@ -1,10 +1,10 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
+import type { Adapter, AdapterUser } from "next-auth/adapters";
 import GithubProvider from "next-auth/providers/github";
 
 import { env } from "~/env";
@@ -31,10 +31,11 @@ declare module "next-auth" {
   // }
 }
 
-const customPrismaAdapter = (p: typeof db) => {
+const customPrismaAdapter = (p: typeof db): Adapter => {
   return {
     ...PrismaAdapter(p),
-    createUser: (data: any) => {
+    // @ts-expect-error bro i dont know how to debug this please help me
+    createUser: (data: Omit<AdapterUser, "id">) => {
       const balance = 1000;
       return p.user.create({ data: { ...data, balance } });
     },
@@ -69,8 +70,8 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
     GithubProvider({
-      clientId: process.env.GITHUB_ID ?? "",
-      clientSecret: process.env.GITHUB_SECRET ?? "",
+      clientId: process.env.GITHUB_PROD_ID ?? "",
+      clientSecret: process.env.GITHUB_PROD_SECRET ?? "",
     }),
   ],
   secret: env.NEXTAUTH_SECRET,

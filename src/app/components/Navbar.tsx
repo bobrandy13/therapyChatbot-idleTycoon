@@ -1,26 +1,25 @@
 "use client";
-import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
-import type { InferGetStaticPropsType, GetStaticProps } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import getBalance from "~/server/fetchBalance";
-import { db } from "~/server/db";
 
-function Navbar(props) {
+function Navbar() {
   //   if (!data) return <div>loading...</div>;
 
   //   if (!session?.user) return <div>Please login first;</div>;
   //   if (!session?.user.image) return <div>no profile image</div>;
   const [pfp, setPFP] = useState("");
   const [balance, setBalance] = useState<number>();
-  const data = getBalance("65aa1b0bdc191db3c2a06b50").then((res) => {
-    if (res) {
-      if (res.image) {
-        setPFP(res.image);
+  getBalance("65aa1b0bdc191db3c2a06b50")
+    .then((res) => {
+      if (res) {
+        if (res.image) {
+          setPFP(res.image);
+        }
+        setBalance(res.balance);
       }
-      setBalance(res.balance);
-    }
-  });
+    })
+    .catch((e) => console.error(e));
   return (
     <div className="text-xl text-white">
       <div className="absolute right-0 float-right m-3 mx-auto flex flex-wrap items-center justify-between p-4 font-bold">

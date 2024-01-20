@@ -36,7 +36,7 @@ export default function HomePage() {
               className="btn btn-primary btn-active m-4 mt-4 w-1/2 p-2 text-white"
               onClick={() => {
                 void signIn("github", {
-                  callbackUrl: `http://localhost:3000/home`,
+                  callbackUrl: `https://therapy-chat-bot-idle-tycoon.vercel.app/home`,
                 });
                 setVisible(false);
                 redirect("/home");

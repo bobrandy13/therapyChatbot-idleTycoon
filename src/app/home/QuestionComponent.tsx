@@ -1,5 +1,6 @@
 "use client";
-import React, { type KeyboardEvent, useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
+import type SessionType from "~/server/tyoes/SessionType";
 import { motion } from "framer-motion";
 import getMachineReponse from "~/server/MachineReponse";
 import { billUser } from "~/server/fetchBalance";
@@ -18,17 +19,21 @@ const messagesLoop = async () => {
   return { prefix, content, author };
 };
 
-const deductFromTotal = (User: any, amount: number): boolean => {
+const deductFromTotal = (User: SessionType, amount: number): boolean => {
+  if (!User.user) {
+    return false;
+  }
+  if (!User.user.id) return false;
   void billUser(User.user.id, amount);
   return true;
 };
 
-function TherapyBot(props) {
+function TherapyBot() {
   const { data: session } = useSession();
   const [submitHidden, setHidden] = useState("block");
   const [machineMessage, setMessage] = useState("Machine is thinking");
   const [showAfteRSubmit, setShow] = useState("hidden");
-  const [deepQuote, setQuote] = useState("hidden");
+  // const [deepQuote, setQuote] = useState("hidden");
   const [isAnimated, setAnimateState] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -59,9 +64,10 @@ function TherapyBot(props) {
       if (!user) {
         return <div>There is no user account</div>;
       }
-      const User = JSON.parse(user);
+      const User = JSON.parse(user) as SessionType;
 
       // TODO: deduct money from the system.
+      console.log(User);
       deductFromTotal(User, 50);
       let counter = 0;
 
@@ -80,7 +86,7 @@ function TherapyBot(props) {
   return (
     <div>
       <Modal_component />
-      <Navbar a={"a"} />
+      <Navbar />
       <div className="min-w-screen flex min-h-screen items-center justify-center text-3xl">
         <>
           <h1

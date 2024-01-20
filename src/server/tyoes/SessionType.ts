@@ -1,4 +1,4 @@
-import { ISODateString } from "next-auth";
+import { type ISODateString } from "next-auth";
 
 export default interface SessionType {
   user?: {

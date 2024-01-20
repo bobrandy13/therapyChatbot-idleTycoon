@@ -1,6 +1,6 @@
 "use server";
 import { db } from "./db";
-import { Session } from "next-auth";
+import { type Session } from "next-auth";
 
 export default async function saveMessage(
   session: Session,
