@@ -6,5 +6,5 @@ give it a try at ![link][https://therapy-chat-bot-idle-tycoon.vercel.app/]
 here are some demo photos
 ![product demo](docs/images/home_screen.png)
 ![product demo](docs/images/asking_screen.png)
-![product demo](docs/images/disclaiminer.png)
+![product demo](docs/images/disclamimer.png)
 ![product demo](docs/images/response_screen.png)
