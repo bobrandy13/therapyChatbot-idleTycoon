@@ -1,4 +1,5 @@
 "use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 import getBalance from "~/server/fetchBalance";
@@ -10,7 +11,10 @@ function Navbar() {
   //   if (!session?.user.image) return <div>no profile image</div>;
   const [pfp, setPFP] = useState("");
   const [balance, setBalance] = useState<number>();
-  getBalance("65aa1b0bdc191db3c2a06b50")
+
+  const { data: session } = useSession();
+  if (!session) return <div>please sign in</div>;
+  getBalance(session?.user.id)
     .then((res) => {
       if (res) {
         if (res.image) {

@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import { useSession } from "next-auth/react";
 import saveMessage from "~/server/saveMessageToDb";
 import Modal_component from "../components/Modal";
+import { type Session } from "next-auth";
 
 const variants = {
   open: { width: "60%", height: "100px", y: 200 },
@@ -19,7 +20,7 @@ const messagesLoop = async () => {
   return { prefix, content, author };
 };
 
-const deductFromTotal = (User: SessionType, amount: number): boolean => {
+const deductFromTotal = (User: Session, amount: number): boolean => {
   if (!User.user) {
     return false;
   }
@@ -60,15 +61,12 @@ function TherapyBot() {
       setShow("inline");
       setAnimateState(true);
 
-      const user = localStorage.getItem("user");
-      if (!user) {
+      if (!session) {
         return <div>There is no user account</div>;
       }
-      const User = JSON.parse(user) as SessionType;
 
       // TODO: deduct money from the system.
-      console.log(User);
-      deductFromTotal(User, 50);
+      deductFromTotal(session, 50);
       let counter = 0;
 
       const dotdotdot = setInterval(() => {

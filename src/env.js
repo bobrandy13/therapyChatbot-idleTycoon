@@ -30,6 +30,8 @@ export const env = createEnv({
     ),
     GITHUB_ID: z.string(),
     GITHUB_SECRET: z.string(),
+    GITHUB_PROD_ID: z.string(),
+    GITHUB_PROD_SECRET: z.string(),
   },
 
   /**
@@ -52,6 +54,8 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     GITHUB_ID: process.env.GITHUB_ID,
     GITHUB_SECRET: process.env.GITHUB_SECRET,
+    GITHUB_PROD_ID: process.env.GITHUB_PROD_ID,
+    GITHUB_PROD_SECRET: process.env.GITHUB_PROD_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

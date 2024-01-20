@@ -8,7 +8,6 @@ export default function HomePage() {
   const { data: session } = useSession();
 
   if (session) {
-    localStorage.setItem("user", JSON.stringify(session));
     console.log(session);
   }
   const [isVisible, setVisible] = useState(true);
@@ -36,10 +35,9 @@ export default function HomePage() {
               className="btn btn-primary btn-active m-4 mt-4 w-1/2 p-2 text-white"
               onClick={() => {
                 void signIn("github", {
-                  callbackUrl: `https://therapy-chat-bot-idle-tycoon.vercel.app/home`,
+                  callbackUrl: "/home",
                 });
                 setVisible(false);
-                redirect("/home");
               }}
             >
               Sign in to get started.
