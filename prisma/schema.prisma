@@ -13,13 +13,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Profile {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  email    String
-  Messages Messages[]
-}
-
 model User {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
@@ -39,8 +32,6 @@ model Messages {
   response        String
   user            User     @relation(fields: [userID], references: [id])
   userID          String   @db.ObjectId
-  Profile         Profile? @relation(fields: [profileId], references: [id])
-  profileId       String?  @db.ObjectId
 }
 
 model Account {

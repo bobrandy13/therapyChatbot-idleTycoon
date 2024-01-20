@@ -11,6 +11,7 @@ function get_random(list: string[]): string | undefined {
 }
 
 const possible_response = [
+  "did you order a yappacino?",
   "stop yapping your fine",
   "yaawwwnn hmm?",
   "unluggy bruh back in my day we didnt have any of these problems",
@@ -31,7 +32,11 @@ const getMachineReponse = async () => {
   const response = (await quote.json()) as QuoteReponse;
   console.log(response);
 
-  return { prefix : random_item , content: response.content, author: response.author };
+  return {
+    prefix: random_item,
+    content: response.content,
+    author: response.author,
+  };
 };
 
 export default getMachineReponse;
