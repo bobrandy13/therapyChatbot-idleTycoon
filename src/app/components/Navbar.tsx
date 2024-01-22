@@ -1,6 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import getBalance from "~/server/fetchBalance";
 
@@ -27,6 +28,15 @@ function Navbar() {
   return (
     <div className="text-xl text-white">
       <div className="absolute right-0 float-right m-3 mx-auto flex flex-wrap items-center justify-between p-4 font-bold">
+        <Link href="/idleTycoon" className="p-4 font-normal">
+          Idle Tycoon (to grind money)
+        </Link>
+        <Link href="/home" className="p-4 font-normal">
+          THerapy
+        </Link>
+        <Link href="/SurveyMonkey" className="p-4 font-normal">
+          Survey Monkey
+        </Link>
         <Image
           src={pfp}
           alt="profile image"

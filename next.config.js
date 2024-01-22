@@ -13,6 +13,11 @@ const config = {
         hostname: "avatars.githubusercontent.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "i.redd.it",
+        port: "",
+      }
     ],
   },
 };

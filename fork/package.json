@@ -1,0 +1,25 @@
+{
+  "name": "discordtoornamentmanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "happy_or_sad.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -x ts-node src/App.ts",
+    "start": "ts-node src/App.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.0.5",
+    "axios": "^0.19.2",
+    "discord.js": "^12.2.0",
+    "pg": "^8.2.1",
+    "reflect-metadata": "^0.1.10",
+    "typeorm": "0.2.25",
+    "typescript": "^3.9.3",
+    "nodemon": "^2.0.4",
+    "ts-node": "8.10.1"
+  }
+}
