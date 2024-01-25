@@ -1,6 +1,6 @@
 function MoneyIcon() {
   return (
-    <div className="h-16 w-16">
+    <div className="absolute h-16 w-16">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
         <defs>
           <style>{`.cls-4{fill:#f6fafd}.cls-5{fill:#78b300}.cls-7{fill:#4f813b}.cls-10{fill:#141e21}`}</style>

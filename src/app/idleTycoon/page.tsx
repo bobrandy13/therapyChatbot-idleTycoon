@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import Navbar from "../components/Navbar";
 import MoneyIcon from "./Svg";
@@ -35,10 +35,14 @@ function Modal() {
   );
 }
 
+const MAX_MONEY_CLIKED = 20;
+
 function Tycoon() {
   useEffect(() => {
     (document.getElementById("my_modal_3") as HTMLDialogElement).showModal();
   }, []);
+
+  const [numMoneyClicked, setMoneyClicked] = useState<number>(0);
 
   const { data: session } = useSession();
 
@@ -46,6 +50,7 @@ function Tycoon() {
 
   const handleClick = () => {
     console.log("button has been clicked, add $10 to the total balance");
+    setMoneyClicked((value) => (value < MAX_MONEY_CLIKED ? value + 1 : value));
   };
 
   return (
@@ -54,13 +59,24 @@ function Tycoon() {
       <Modal />
 
       {/* main content starts here */}
-      <div className="flex h-screen w-screen items-center justify-center">
-        <button className="btn btn-primary h-24 w-52" onClick={handleClick}>
-          Click here!
-        </button>
-        <motion.div>
-          <MoneyIcon />
-        </motion.div>
+      <div className="h-screen w-screen">
+        <div className="flex h-screen w-screen items-center justify-center">
+          <button className="btn btn-primary h-24 w-52" onClick={handleClick}>
+            Click here!
+          </button>
+        </div>
+        <div
+          className=""
+          style={{
+            position: "absolute",
+            top: 150,
+            left: 120,
+          }}
+        >
+          {Array.from(Array(numMoneyClicked).keys()).map((_, i) => {
+            return <MoneyIcon key={i} />;
+          })}
+        </div>
       </div>
     </>
   );
