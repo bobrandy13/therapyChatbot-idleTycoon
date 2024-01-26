@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import saveMessage from "~/server/saveMessageToDb";
 import Modal_component from "../components/Modal";
 import { type Session } from "next-auth";
+import messages from "~/server/getMessages";
 
 const variants = {
   open: { width: "60%", height: "100px", y: 200 },
@@ -30,6 +31,7 @@ const deductFromTotal = (User: Session, amount: number): boolean => {
 };
 
 function TherapyBot() {
+  const [counter, setCounter] = useState(0);
   const { data: session } = useSession();
   const [submitHidden, setHidden] = useState("block");
   const [machineMessage, setMessage] = useState("Machine is thinking");
@@ -38,18 +40,31 @@ function TherapyBot() {
   const [isAnimated, setAnimateState] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
+  if (!messages) return <div>Please refresh the page</div>
+
   if (!session) return <div>No account please login</div>;
 
   const callback = async () => {
     console.log("timer finished");
     const { prefix, content, author } = await messagesLoop();
+    let message = "";
 
-    const message = `${prefix}. But "` + content + `" said ` + author;
+    if (session.user.id === "65ab4ef391cd122b7067805b" || session.user.id === "65ab41a116affc2896cc7a4b") {
+      // set custom message;
+      message = "Hi! Dont be sad. This therapy chatbot is always here for you, and you'll never run out of money";
+      if (messages[counter]) message = messages[counter] ?? "Don't be sad 😄";
+    } else {
+      message = `${prefix}. But "` + content + `" said ` + author;
+    }
+
     if (textAreaRef.current) {
       saveMessage(session, textAreaRef.current?.value, message).catch((e) =>
         console.log("there has ben an error", e),
       );
     }
+
+    setCounter(counter => counter + 1);
+    setCounter(counter => counter % messages.length)
 
     setMessage(message);
   };
