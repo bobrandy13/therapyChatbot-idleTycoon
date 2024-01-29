@@ -27,7 +27,6 @@ function SurveyMoney() {
 
           {/* React form down below */}
           <div className="join m-4 mt-10">
-            <form>
               <input
                 className="btn join-item rounded"
                 type="radio"
@@ -59,7 +58,6 @@ function SurveyMoney() {
                 aria-label="stronly agree"
               />
               <button className="btn btn-secondary">submit</button>
-            </form>
           </div>
         </div>
 

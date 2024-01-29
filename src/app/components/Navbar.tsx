@@ -34,9 +34,6 @@ function Navbar() {
         <Link href="/home" className="p-4 font-normal">
           THerapy
         </Link>
-        <Link href="/SurveyMonkey" className="p-4 font-normal">
-          Survey Monkey
-        </Link>
         <Image
           src={pfp}
           alt="profile image"

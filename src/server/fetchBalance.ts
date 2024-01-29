@@ -22,3 +22,18 @@ export async function billUser(userId: string, deduct_amount: number) {
     return updateBalance;
   }
 }
+
+export async function User_makes_money(userId: string, append_amount: number) {
+  const balance = await getBalance(userId);
+
+  if (balance) {
+    return db.user.update({
+        where: {
+            id: userId,
+        },
+        data: {
+            balance: balance.balance + append_amount,
+        },
+        });
+    }
+}

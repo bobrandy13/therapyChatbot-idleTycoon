@@ -1,4 +1,6 @@
-function MoneyIcon() {
+import React from "react";
+function MoneyIcon({pos_x, pos_y}: {pos_x: number, pos_y: number}) {
+  console.log(pos_x, pos_y)
   return (
     <div className="absolute h-16 w-16">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
