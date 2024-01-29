@@ -117,7 +117,7 @@ function Tycoon() {
             <Confetti
                 width={width}
                 height={height}
-                numberOfPieces={500}
+                numberOfPieces={5}
             />
         )}
         <div className="flex h-screen w-screen items-center justify-center">
