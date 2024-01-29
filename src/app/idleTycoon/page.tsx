@@ -2,10 +2,8 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Navbar from "../components/Navbar";
-import MoneyIcon from "./Svg";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
-import updateBalance from "~/server/updateBalance";
 import {User_makes_money} from "~/server/fetchBalance";
 import getWindowDimensions from "~/server/getDmensions";
 import Confetti from "react-confetti"
