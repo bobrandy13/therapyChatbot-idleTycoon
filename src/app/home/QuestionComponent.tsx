@@ -37,7 +37,7 @@ const deductFromTotal = (User: Session, amount: number): boolean => {
 function TherapyBot() {
   const { data: session } = useSession();
   const [submitHidden, setHidden] = useState("block");
-  const [meme, setMeme] = useState<memeType>({});
+  const [meme, setMeme] = useState<memeType>();
   const [machineMessage, setMessage] = useState("Machine is thinking");
   const [showAfteRSubmit, setShow] = useState("hidden");
   // const [deepQuote, setQuote] = useState("hidden");
@@ -77,12 +77,12 @@ function TherapyBot() {
       deductFromTotal(session, 50);
       let counter = 0;
 
-      setMeme({});
+      setMeme(undefined);
 
       const dotdotdot = setInterval(() => {
         counter++;
         setMessage("Machien is thinking");
-        setMessage((message) => (message += ".".repeat(counter % 4)));
+        setMessage((message) => (message + ".".repeat(counter % 4)));
         if (counter > WAITING_TIME) {
           clearInterval(dotdotdot);
           void callback();
@@ -101,7 +101,7 @@ function TherapyBot() {
             className={` absolute top-24 ${showAfteRSubmit} p-10 text-center`}
           >
             <AnimatedText text={machineMessage} />
-            {meme?.url && meme.url !== undefined && <>
+            {meme?.url && true && <>
               {/* render the meme  if the meme exists*/}
               <div className="flex items-center justify-center w-full m-4">
                 <Image src={meme.url} alt="meme image" height={400} width={400} />
