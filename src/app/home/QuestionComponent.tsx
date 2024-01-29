@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import getMachineReponse from "~/server/MachineReponse";
-import { billUser } from "~/server/fetchBalance";
+import getBalance, { billUser } from "~/server/fetchBalance";
 import Navbar from "../components/Navbar";
 import { useSession } from "next-auth/react";
 import saveMessage from "~/server/saveMessageToDb";
@@ -72,22 +72,28 @@ function TherapyBot() {
       if (!session) {
         return <div>There is no user account</div>;
       }
+      const balance = await getBalance(session.user.id)
 
-      // TODO: deduct money from the system.
-      deductFromTotal(session, 50);
-      let counter = 0;
+      if (balance && balance.balance > 0) {
+        // TODO: deduct money from the system.
+        deductFromTotal(session, 50);
+        let counter = 0;
 
-      setMeme(undefined);
+        setMeme(undefined);
 
-      const dotdotdot = setInterval(() => {
-        counter++;
-        setMessage("Machien is thinking");
-        setMessage((message) => (message + ".".repeat(counter % 4)));
-        if (counter > WAITING_TIME) {
-          clearInterval(dotdotdot);
-          void callback();
-        }
-      }, 1000);
+
+        const dotdotdot = setInterval(() => {
+          counter++;
+          setMessage("Machien is thinking");
+          setMessage((message) => (message + ".".repeat(counter % 4)));
+          if (counter > WAITING_TIME) {
+            clearInterval(dotdotdot);
+            void callback();
+          }
+        }, 1000);
+      } else {setMessage("bro ur broke lmao go grind the other games to get some money.")}
+
+
     }
   };
 
