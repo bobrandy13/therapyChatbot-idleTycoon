@@ -31,6 +31,9 @@ function Navbar() {
         <Link href="/idleTycoon" className="p-4 font-normal">
           Idle Tycoon (to grind money)
         </Link>
+        <Link href="/shop" className="p-4 font-normal">
+          Shop
+        </Link>
         <Link href="/home" className="p-4 font-normal">
           THerapy
         </Link>
