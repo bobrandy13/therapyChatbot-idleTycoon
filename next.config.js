@@ -15,9 +15,14 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "daisyui.com",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "i.redd.it",
         port: "",
-      }
+      },
     ],
   },
 };

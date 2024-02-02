@@ -1,26 +1,19 @@
-"use client";
 import React from "react";
 import { items } from "~/app/shop/items";
 import Navbar from "~/app/components/Navbar";
 import ItemComponent from "../components/ItemComponent";
 import SelectedItem from "../components/SelectedItem";
-import type Item from "~/server/tyoes/itemType";
-import { set } from "zod";
 
 export default function Shop() {
-  const [selectedItem, setSelectedItem] = React.useState<Item | null>(null);
-  const setSelectedItemHandler = (item: Item) => {
-    setSelectedItem(item);
-  };
   return (
-    <div className={"flex h-screen min-h-screen w-screen flex-col"}>
+    <div className={"flex min-h-screen w-screen flex-col"}>
       <Navbar />
-      <div className="h-24 w-24 bg-slate-200">Welcome to my shop</div>
-      <div className={"flex h-full flex-grow items-end justify-center p-4"}>
-        <SelectedItem item={selectedItem} />
+      <div className="m-4 flex w-screen justify-center"></div>
+      <div className={"flex flex-grow items-end justify-center"}>
+        <SelectedItem />
         <div
           className={
-            "m-10 flex h-1/2 w-screen flex-grow flex-row  justify-stretch overflow-x-auto overflow-y-auto rounded-xl bg-neutral p-4"
+            "m-10 flex h-96 w-screen flex-grow flex-row justify-stretch overflow-x-auto rounded-xl bg-neutral p-4"
           }
         >
           {/*    map for as many items that you have to sell */}
@@ -31,7 +24,6 @@ export default function Shop() {
                 item={item}
                 index={index}
                 key={index}
-                setItem={setSelectedItemHandler}
               ></ItemComponent>
             );
           })}
