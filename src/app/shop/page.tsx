@@ -3,6 +3,7 @@ import React from "react";
 import { items } from "~/app/shop/items";
 import Navbar from "~/app/components/Navbar";
 import ItemComponent from "../components/ItemComponent";
+import bg from "/public/rainbow.jpg"
 import SelectedItem from "../components/SelectedItem";
 import type Item from "~/server/tyoes/itemType";
 

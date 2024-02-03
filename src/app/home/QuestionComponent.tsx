@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { motion } from "framer-motion";
 import getMachineReponse from "~/server/MachineReponse";
 import getBalance, { billUser } from "~/server/fetchBalance";
@@ -12,6 +12,7 @@ import { AnimatedText } from "../components/AnimatedText";
 import type memeType from "~/server/tyoes/memeType";
 import renderMeme from "~/server/renderMeme";
 import Image from "next/image";
+import bg from "/public/cat.jpg";
 
 const WAITING_TIME = 3;
 
@@ -43,6 +44,16 @@ function TherapyBot() {
   // const [deepQuote, setQuote] = useState("hidden");
   const [isAnimated, setAnimateState] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const background = localStorage.getItem("cat_background")
+
+    console.log("background is", background)
+
+    if (background != "true") {
+      bg.src="/";
+    }
+  }, [])
 
   if (!session) return <div>No account please login</div>;
 
@@ -97,11 +108,14 @@ function TherapyBot() {
     }
   };
 
+
+
+
   return (
     <div>
       <Modal_component />
       <Navbar />
-      <div className="min-w-screen flex min-h-screen items-center justify-center text-3xl">
+      <div className="min-w-screen flex min-h-screen items-center justify-center text-3xl" style={{backgroundImage: `url(${bg.src})`, backgroundSize: "cover"}}>
         <>
           <h1
             className={` absolute top-24 ${showAfteRSubmit} p-10 text-center`}

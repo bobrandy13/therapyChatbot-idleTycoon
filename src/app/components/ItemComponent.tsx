@@ -35,7 +35,7 @@ function ItemComponent({
         <h2 className="card-title">{item.name}</h2>
         <p>{item.description}</p>
         <div className="card-actions">
-          <button className="btn btn-primary">Buy Now</button>
+          <button className="btn btn-primary" onClick={() => localStorage.setItem("cat_background", "true")}>Buy Now</button>
         </div>
       </div>
     </div>

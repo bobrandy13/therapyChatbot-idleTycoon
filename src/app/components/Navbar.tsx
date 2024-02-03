@@ -17,12 +17,14 @@ function Navbar() {
   if (!session) return <div>please sign in</div>;
   getBalance(session?.user.id)
     .then((res) => {
-      if (res) {
-        if (res.image) {
-          setPFP(res.image);
+        if (res) {
+            if (res.image) {
+                setPFP(res.image);
+            }
+            if (res.balance) {
+                setBalance(res.balance);
+            }
         }
-        setBalance(res.balance);
-      }
     })
     .catch((e) => console.error(e));
   return (
