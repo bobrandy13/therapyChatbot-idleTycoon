@@ -15,7 +15,7 @@ function ItemComponent({
   return (
     //     make it a card with width and do not use flex col
     <div
-      className="card m-3 h-96 w-96 min-w-96 bg-base-100 shadow-xl hover:bg-base-200"
+      className="card m-3 h-96 w-96 min-w-72 bg-base-100 shadow-xl hover:bg-base-200"
       onClick={() => {
         // handleClick(item);
         setItem(item);

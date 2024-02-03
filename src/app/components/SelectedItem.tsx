@@ -1,7 +1,7 @@
 import * as React from "react";
 import type Item from "~/server/tyoes/itemType";
 
-const BASE_CLASS = `m-10 flex h-1/2 w-screen w-1/3 flex-grow flex-row justify-stretch overflow-x-auto rounded-xl bg-neutral p-4`;
+const BASE_CLASS = `m-10 flex h-1/4 w-full w-1/3 mt-4 flex-grow flex-row justify-stretch overflow-x-auto rounded-xl bg-neutral p-4`;
 
 function SelectedItem({ item }: { item: Item | null }) {
   console.log(item);
